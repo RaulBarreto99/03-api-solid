@@ -1,0 +1,65 @@
+// => npm init -y => Para criar o package.json
+// => Criar uma pasta 'src'.
+// => Dentro da pasta 'src' criar o 'server.ts' onde vai ser o servidor http.
+// => npm i typescript @types/node tsx tsup -D.
+        -> typescript @types/node =>sendo o proprio typescript.
+        -> tsx => Biblioteca usada para converter e executar o codigo typescript pois o node não entende por padrão.
+        -> tsup => Biblioteca usada para criar a versão de buld da aplicação.
+// => npx tsc --init => Cria o arquivo tsconfig.json.
+        -> Dentro do arquivo trocamos o target para 'es2020'.
+// => npm i fastify => Instancia do servidor.
+// => Criar o app.ts para criar a nossa aplicação.
+// => criar o .gitignore
+// => criar no package.json o script 'dev':'tsx watch src/server.ts'
+// => Criar no package.json o script 'build':'tsup src --out-dir build'
+// => Criar o script 'start':'node build/server.js' para executar nosso codigo em prod. 
+// => Criar o arquivo '.npmrc' para configurar o npm com 'save_exact=true'
+// => rodar novamente o npm i typescript @types/node tsx tsup -D e o npm i fastify
+// => configurar '.env'
+// => intalar biblioteca 'npm i dotenv'
+// => Criar pasta 'env' dentro de 'src' e dentro criar 'index.ts', utilzado para validar as variaveis de ambiente.
+// => npm i zod, utilizado para fazer a validação das variaveis.
+// => npm i prisma -D
+// => npx prisma init
+// => npx prisma generate, somente depois que criar a model/table para ele criar a tipagem
+// => npm i @prisma/client
+// =>  docker run --name api-solid-pg -e POSTGRESQL_USERNAME=docker -e POSTGRESQL_PASSWORD=docker -e POSTGRESQL_DATABASE=apisolid -p 5432:5432 bitnami/postgresql
+        -> Acima era para criar um container do bitnami/postgresql, mas tabem da para fazer isso no app desktop, assim como start e stop o container.
+// => Agora tem que ajeitar o .env
+// => npx prisma migrate dev, serve para rodar as migrations do banco de dados
+// => npx prisma studio
+// => docker compose up -d
+
+//=> ENCRIPTAMENTO DE SENHA <=//
+// => npm i bcryptjs
+// => npm i -D @types/bcryptjs
+
+
+//==> VITEST <==//
+// => npm i vitest vite-tsconfig-paths -D
+// => no package.json criar os scripts -> "test": "vitest run", "test:watch": "vitest", "test:coverage": "vitest run --coverage"
+// => usando o coverage ele da erro e precisa adicionar isso ao vite.config.ts test: { coverage: { exclude: ['generated/**', 'node_modules/**', ],},},
+// => npm i -D @vitest/ui -> deprecated
+
+//==> Criando uma funcionalidade <==//
+// => primeiro faz o use-case
+// => segundo pode fazer os testes unitarios
+// => terceiro faz o controller
+// => quarto inclui no route.ts
+
+// => npm i dayjs -> usando ele conseguimos definir o start e end do dia, usado para validar a data do checkin
+
+//==> Autenticaçao <==//
+// => JWT - Jason Web Token
+// => npm i fastify/jwt
+// => npm i @vitest/ui@latest -D 
+// => npm i vite -D 
+
+//==> Enviroment Test <==//
+// => Dentro da pasta Prisma cria uma pasta para os enviroments e dentro dela cria um arquivo .ts onde sera feito o teste.
+// => No vite.config.mts é importante atualizar as configurações de projects de teste
+// => npm i supertest -D -> serve para fazer testes usando requisições http ser precisar botar a aplicação no ar
+// => npm i @types/supertest -D
+
+//==> RBAC <==//
+// => npm i @fastify/cookie
