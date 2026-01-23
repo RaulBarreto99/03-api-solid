@@ -17,18 +17,34 @@
 // => rodar novamente o npm i typescript @types/node tsx tsup -D e o npm i fastify
 // => configurar '.env'
 // => intalar biblioteca 'npm i dotenv'
-// => Criar pasta 'env' dentro de 'src' e dentro criar 'index.ts', utilzado para validar as variaveis de ambiente.
-// => npm i zod, utilizado para fazer a validação das variaveis.
-// => npm i prisma -D
+// => Criar pasta 'env' dentro de 'src' e dentro criar 'index.ts', utilzado para validar as variaveis de ambiente, e tem toda uma configuracao dentro desse arquivo.
+// => npm i zod, utilizado para fazer a validação das variaveis do projeto inteiro (controllers, env/index).
+// => npm i prisma -D (Na intalacao do prisma e bom ficar de olho que apartir da versao 7 ele muda muitas configuracoes)
 // => npx prisma init
 // => npx prisma generate, somente depois que criar a model/table para ele criar a tipagem
 // => npm i @prisma/client
 // =>  docker run --name api-solid-pg -e POSTGRESQL_USERNAME=docker -e POSTGRESQL_PASSWORD=docker -e POSTGRESQL_DATABASE=apisolid -p 5432:5432 bitnami/postgresql
         -> Acima era para criar um container do bitnami/postgresql, mas tabem da para fazer isso no app desktop, assim como start e stop o container.
-// => Agora tem que ajeitar o .env
+// => Agora tem que ajeitar o .env com o DATABASE_URL
 // => npx prisma migrate dev, serve para rodar as migrations do banco de dados
 // => npx prisma studio
-// => docker compose up -d
+// => docker compose up -d , aqui configuramos o docker compose criando um arquivo chamado docker-compose.yml
+
+
+//=> Linha de criação inicial <=//
+//=> OBS: Após termos os repositorios criados essa linha muda um pouco, pois basicamente temos 1 repositorio para cada tabela da model, ou seja, talvez vamos fazer inclusoes e alteraçoes neles ao inves de criar um novo sempre, sendo assim pode ser mais util seguir o passo a passo de 'Criando uma funcionalidade' <=//
+
+// => Criamos o arquivo server.ts na raiz do projeto e o configuramos com as infos do server
+// => Criamos o arquivo app.ts na raiz do projeto e nele instanciamos o fastify e registramos os aquivos de route.ts (para isso vamos precisar criar os arquivos de route.ts)
+// => Nos controlles criamos os arquivos de routes.ts e nele configuramos o endpoint a ser chamado no insominia apontando para qual funcionalidade esse endpoint vai realizar (para isso vamos precisar criar o arquivo da funcionalidade)
+// => Ainda nos controllers criamos o arquivo da funcionalidade ex: register-organizations.ts, nele definimos o body a ser necessario na chamada do endpoint e vamos passar a ação para o repositorio necessario (para isso vamos precisar criar o repositorio da funcionalidade 'organizations-repository.ts' e tambem o do prisma 'prisma-organizations-repository.ts' )
+// => Configuramos o repositorio da funcionalidade meio que setando quais ações o prisma poderá criar 
+// => Configuramos o repositorio do prisma implementando o repositorio da funcionalidade, e agora realmente criando as ações que poderao ser chamadas 
+// => Com isso feito, agora criamos nosso arquivo de use-case da funcionalidade, pois vamos chama-lo no controler
+// => No use-case temos o metodo 'execute' que executa o caso de uso, e dentro dele temos as validações para o endpoint chamado no insomia e a chamada do repositorio fazendo a ação solicitada no repositorio, por exemplo, pedindo a criacao de uma organization.
+// => após isso no nosso controller chamamos o metodo execute do caso de uso e passamos os campos que recebemos na requisição para que ele execute a ação que queremos
+// => por ultimo e explicado mais a baixo, incluimos os testes unitarios para a funcionalidade
+
 
 //=> ENCRIPTAMENTO DE SENHA <=//
 // => npm i bcryptjs
@@ -37,7 +53,9 @@
 
 //==> VITEST <==//
 // => npm i vitest vite-tsconfig-paths -D
+// => criar o arquivo vite.config.mts
 // => no package.json criar os scripts -> "test": "vitest run", "test:watch": "vitest", "test:coverage": "vitest run --coverage"
+// => aqui o teste ja pode ser criado
 // => usando o coverage ele da erro e precisa adicionar isso ao vite.config.ts test: { coverage: { exclude: ['generated/**', 'node_modules/**', ],},},
 // => npm i -D @vitest/ui -> deprecated
 
@@ -45,7 +63,7 @@
 // => primeiro faz o use-case
 // => segundo pode fazer os testes unitarios
 // => terceiro faz o controller
-// => quarto inclui no route.ts
+// => quarto inclui no route.ts especifico do controller onde vc fez a funcionalidade
 
 // => npm i dayjs -> usando ele conseguimos definir o start e end do dia, usado para validar a data do checkin
 
