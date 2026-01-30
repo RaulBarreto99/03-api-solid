@@ -36,7 +36,7 @@
 
 // => Criamos o arquivo server.ts na raiz do projeto e o configuramos com as infos do server
 // => Criamos o arquivo app.ts na raiz do projeto e nele instanciamos o fastify e registramos os aquivos de route.ts (para isso vamos precisar criar os arquivos de route.ts)
-// => Nos controlles criamos os arquivos de routes.ts e nele configuramos o endpoint a ser chamado no insominia apontando para qual funcionalidade esse endpoint vai realizar (para isso vamos precisar criar o arquivo da funcionalidade)
+// => Nos controllers criamos os arquivos de routes.ts e nele configuramos o endpoint a ser chamado no insominia apontando para qual funcionalidade esse endpoint vai realizar (para isso vamos precisar criar o arquivo da funcionalidade)
 // => Ainda nos controllers criamos o arquivo da funcionalidade ex: register-organizations.ts, nele definimos o body a ser necessario na chamada do endpoint e vamos passar a ação para o repositorio necessario (para isso vamos precisar criar o repositorio da funcionalidade 'organizations-repository.ts' e tambem o do prisma 'prisma-organizations-repository.ts' )
 // => Configuramos o repositorio da funcionalidade meio que setando quais ações o prisma poderá criar 
 // => Configuramos o repositorio do prisma implementando o repositorio da funcionalidade, e agora realmente criando as ações que poderao ser chamadas 
@@ -64,6 +64,14 @@
 // => segundo pode fazer os testes unitarios
 // => terceiro faz o controller
 // => quarto inclui no route.ts especifico do controller onde vc fez a funcionalidade
+
+//==> Criando um teste<==//
+// => O teste é criando para cada controller, use-case e talvez para outras funcionalidades que vc queira 
+// => Criamos o arquivo de teste ".spec.ts", nele iremos escrever os testes e vamos precisar associar, apenas no arquivo de testes, o nosso repository da funcionalidade "RegisterOrganizationsUseCase" ao "InMemoryOrganizationsRepository", então devemos crialo antes.
+// => o InMemoryOrganizationsRepository é desvinculado do prisma, pois o objetivo é sempre ter um "Banco de dados" limpo para executar cada teste unitario.
+// => no beforeEach configuramos o repositorio 
+// => E por fim criamos os testes
+// => Alguns precisaram do retorno da API, então devemos no arquivo original que estamos criando o teste, configurar a Response colocando a Promise no execute e retornando o que foi criado. 
 
 // => npm i dayjs -> usando ele conseguimos definir o start e end do dia, usado para validar a data do checkin
 
